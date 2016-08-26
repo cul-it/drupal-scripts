@@ -1,4 +1,4 @@
-README.txt - info for Drupal Sites
+## README.md - info for Drupal Sites
 
 Share scripts in puppet
 	puppet/modules/webserver/files/drupal/
