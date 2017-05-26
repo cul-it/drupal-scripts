@@ -18,7 +18,7 @@ do
     echo "************************"
     NAME=`echo $alias  | cut -d. -f 2-3`
     echo "$NAME"
-    terminus remote:drush -q "$NAME" -- pml --status=enabled | grep "$MODULE" || echo "$MODULE is not enabled"
+    terminus --yes remote:drush -q "$NAME" -- pml --no-core --type=module --status=enabled --package=Other
     echo ""
   fi
 done
