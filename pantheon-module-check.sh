@@ -4,11 +4,12 @@
 if [ $# -ne 1 ]
 then
     echo "Error in $0 - Invalid Argument Count"
-    echo "Syntax: $0 <module/theme name>"
+    echo "Syntax: $0 <package name>"
+    echo "package is like mail,media,"
     exit
 fi
 
-MODULE=$1
+PACKAGE=$1
 
 for alias in $(drush sa)
 do
@@ -18,7 +19,7 @@ do
     echo "************************"
     NAME=`echo $alias  | cut -d. -f 2-3`
     echo "$NAME"
-    terminus --yes remote:drush -q "$NAME" -- pml --no-core --type=module --status=enabled --package=Other
+    terminus --yes remote:drush -q "$NAME" -- pml --no-core --type=module --status=enabled --package="$PACKAGE"
     echo ""
   fi
 done
