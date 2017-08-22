@@ -4,22 +4,25 @@
 if [ $# -ne 1 ]
 then
     echo "Error in $0 - Invalid Argument Count"
-    echo "Syntax: $0 <package name>"
-    echo "package is like mail,media,"
+    echo "Syntax: $0 <module name>"
+    echo "module is like views"
     exit
 fi
 
-PACKAGE=$1
+SEEKING=$1
 
 for alias in $(drush sa)
 do
-  if [[ $alias == *".live" ]]
-    then
-    echo ""
-    echo "************************"
+  if [[ $alias == *".live" ]]; then
     NAME=`echo $alias  | cut -d. -f 2-3`
-    echo "$NAME"
-    terminus --yes remote:drush -q "$NAME" -- pml --no-core --type=module --status=enabled --package="$PACKAGE"
-    echo ""
+    LIST=`drush "$alias" pml --status=enabled --no-core --type=module --format=list`
+    OUTPUT="$NAME"
+    while read -r MODULE; do
+        if [ "$MODULE" = "$SEEKING" ]; then
+            OUTPUT="$NAME has $SEEKING enabled."
+            break
+        fi
+    done <<< "$LIST"
+    echo "$OUTPUT"
   fi
 done
