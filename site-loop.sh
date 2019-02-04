@@ -17,4 +17,5 @@ do
   ENABLED=`drush pml --status=enabled --pipe`
   mkdir -p "/users/jgr25/module_lists/$SIMPLEVERSION"
   echo "$ENABLED" > "/users/jgr25/module_lists/$SIMPLEVERSION/$SITE.txt"
+  nslookup "$SITE"
 done
