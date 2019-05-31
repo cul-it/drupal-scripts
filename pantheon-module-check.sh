@@ -21,7 +21,7 @@ do
     OUTPUT="$NAME"
     while read -r MODULE; do
         if [ "$MODULE" = "$SEEKING" ]; then
-            OUTPUT="$NAME has $SEEKING enabled."
+            OUTPUT=" ****************************** $NAME has $SEEKING enabled."
             break
         fi
     done <<< "$LIST"
